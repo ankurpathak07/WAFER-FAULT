@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero" style="background: linear-gradient(rgba(17, 18, 13, 0.75), rgba(17, 18, 13, 0.75)), url('{{ url_for('static', filename='images/hero-bg.jpg') }}'); background-size: cover; background-position: center;">
+    <div class="hero-content fade-in">
+        <h1>Advanced Wafer <br>Defect Detection</h1>
+        <p>Leverage the power of AI to detect and analyze wafer defects with unprecedented accuracy and speed.</p>
+        <div class="hero-btns">
+            <a href="#upload" class="btn btn-primary">Get Started</a>
+            <a href="#features" class="btn btn-secondary">Learn More</a>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="features section">
+    <div class="container">
+        <h2 class="section-title fade-in">Features Overview</h2>
+        
+        <div class="features-grid">
+            <!-- Feature 1 -->
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3 class="feature-title">AI-Powered Analysis</h3>
+                <ul>
+                    <li>State-of-the-art machine learning algorithms</li>
+                    <li>Real-time processing</li>
+                    <li>Pattern recognition</li>
+                    <li>Automated classification</li>
+                </ul>
+                <a href="#" class="learn-more">Learn More</a>
+            </div>
+            
+            <!-- Feature 2 -->
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3 class="feature-title">Real-Time Processing</h3>
+                <ul>
+                    <li>50ms processing time</li>
+                    <li>High throughput</li>
+                    <li>Parallel processing</li>
+                    <li>Low latency</li>
+                </ul>
+                <a href="#" class="learn-more">Learn More</a>
+            </div>
+            
+            <!-- Feature 3 -->
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3 class="feature-title">Detailed Reports</h3>
+                <ul>
+                    <li>Custom reports</li>
+                    <li>Data visualization</li>
+                    <li>Trend analysis</li>
+                    <li>Export capabilities</li>
+                </ul>
+                <a href="#" class="learn-more">Learn More</a>
+            </div>
+            
+            <!-- Feature 4 -->
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3 class="feature-title">Quality Assurance</h3>
+                <ul>
+                    <li>99.9% accuracy</li>
+                    <li>Quality metrics</li>
+                    <li>Compliance checks</li>
+                    <li>Audit trails</li>
+                </ul>
+                <a href="#" class="learn-more">Learn More</a>
+            </div>
+            
+            <!-- Feature 5 -->
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <i class="fas fa-plug"></i>
+                </div>
+                <h3 class="feature-title">Integration Ready</h3>
+                <ul>
+                    <li>API support</li>
+                    <li>Custom workflows</li>
+                    <li>Data export</li>
+                    <li>Third-party tools</li>
+                </ul>
+                <a href="#" class="learn-more">Learn More</a>
+            </div>
+            
+            <!-- Feature 6 -->
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="feature-title">Security & Compliance</h3>
+                <ul>
+                    <li>Data encryption</li>
+                    <li>Access control</li>
+                    <li>Audit logging</li>
+                    <li>Compliance reports</li>
+                </ul>
+                <a href="#" class="learn-more">Learn More</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats">
+    <div class="container">
+        <div class="stats-container">
+            <div class="stat-item fade-in">
+                <div class="stat-number">99.9%</div>
+                <div class="stat-text">Detection Accuracy</div>
+            </div>
+            
+            <div class="stat-item fade-in">
+                <div class="stat-number">50ms</div>
+                <div class="stat-text">Processing Time</div>
+            </div>
+            
+            <div class="stat-item fade-in">
+                <div class="stat-number">10+</div>
+                <div class="stat-text">Defect Types</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Upload Section -->
+<section id="upload" class="upload-section section">
+    <div class="container">
+        <h2 class="section-title fade-in">Upload Your Wafer Image</h2>
+        
+        <div class="upload-container fade-in">
+            <div class="upload-area">
+                <div class="upload-icon">
+                    <i class="fas fa-upload"></i>
+                </div>
+                <h3>Drag & Drop your file here</h3>
+                <p>or click to browse files</p>
+                <span class="file-name" style="display: none;"></span>
+                <input type="file" class="file-input" accept="image/*">
+            </div>
+            
+            <button class="btn btn-primary upload-btn">Upload Wafer Image</button>
+            
+            <div class="results-container">
+                <h3 class="results-title">Analysis Results</h3>
+                <div class="results-card">
+                    <div class="result-item">
+                        <span class="result-label">Filename:</span>
+                        <span class="result-value result-filename">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Defects Detected:</span>
+                        <span class="result-value result-defects">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Analysis Accuracy:</span>
+                        <span class="result-value result-accuracy">-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta section">
+    <div class="container">
+        <h2 class="section-title fade-in">Ready to Transform Your Wafer Inspection Process?</h2>
+        <p class="fade-in">Join leading semiconductor manufacturers in revolutionizing quality control with AI-powered defect detection.</p>
+        <a href="#upload" class="btn btn-primary fade-in">Start Now</a>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="contact section">
+    <div class="container">
+        <h2 class="section-title fade-in">Contact Info</h2>
+        
+        <div class="contact-grid">
+            <div class="contact-info fade-in">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h3>Email</h3>
+                        <p>info@silifault.com</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h3>Phone</h3>
+                        <p>+1 (555) 123-4567</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 
