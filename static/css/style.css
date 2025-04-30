@@ -140,10 +140,10 @@ header.scrolled {
   font-family: var(--heading-font);
   font-size: 24px;
   font-weight: 700;
-  color: white;
+  color: rgb(62, 4, 208);
   display: flex;
   align-items: center;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 3px rgba(196, 9, 9, 0.3);
 }
 
 .logo span {

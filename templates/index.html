@@ -7,7 +7,7 @@
         <h1>Advanced Wafer <br>Defect Detection</h1>
         <p>Leverage the power of AI to detect and analyze wafer defects with unprecedented accuracy and speed.</p>
         <div class="hero-btns">
-            <a href="#upload" class="btn btn-primary">Get Started</a>
+            <a href="{{ url_for('upload_page') }}" class="btn btn-primary">Get Started</a>
             <a href="#features" class="btn btn-secondary">Learn More</a>
         </div>
     </div>
@@ -135,7 +135,7 @@
 </section>
 
 <!-- Upload Section -->
-<section id="upload" class="upload-section section">
+<!--<section id="upload" class="upload-section section">
     <div class="container">
         <h2 class="section-title fade-in">Upload Your Wafer Image</h2>
         
@@ -171,14 +171,14 @@
             </div>
         </div>
     </div>
-</section>
+</section>-->
 
 <!-- CTA Section -->
 <section class="cta section">
     <div class="container">
         <h2 class="section-title fade-in">Ready to Transform Your Wafer Inspection Process?</h2>
         <p class="fade-in">Join leading semiconductor manufacturers in revolutionizing quality control with AI-powered defect detection.</p>
-        <a href="#upload" class="btn btn-primary fade-in">Start Now</a>
+        <a href="{{ url_for('upload_page') }}" class="btn btn-primary fade-in">Start Now</a>
     </div>
 </section>
 

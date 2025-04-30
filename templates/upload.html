@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Upload Section -->
+<section class="upload-section section">
+    <div class="container">
+        <h2 class="section-title fade-in">Upload Your Wafer Image</h2>
+        
+        <div class="upload-container fade-in">
+            <div class="upload-area">
+                <div class="upload-icon">
+                    <i class="fas fa-upload"></i>
+                </div>
+                <h3>Drag & Drop your file here</h3>
+                <p>or click to browse files</p>
+                <span class="file-name" style="display: none;"></span>
+                <input type="file" class="file-input" accept="image/*">
+            </div>
+            
+            <button class="btn btn-primary upload-btn">Upload Wafer Image</button>
+            
+            <div class="results-container">
+                <h3 class="results-title">Analysis Results</h3>
+                <div class="results-card">
+                    <div class="result-item">
+                        <span class="result-label">Filename:</span>
+                        <span class="result-value result-filename">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Defects Detected:</span>
+                        <span class="result-value result-defects">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Analysis Accuracy:</span>
+                        <span class="result-value result-accuracy">-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 
