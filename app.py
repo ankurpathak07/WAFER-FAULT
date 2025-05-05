@@ -1,17 +1,104 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for, flash, session
 import os
 import re
+import torch
+import torch.nn as nn
+import torchvision.transforms as transforms
+from PIL import Image
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import timedelta
 
+class ImprovedCNN(nn.Module):
+    def __init__(self, num_classes):
+        super(ImprovedCNN, self).__init__()
+        
+        # Enhanced feature extraction
+        self.features = nn.Sequential(
+            # First conv block
+            nn.Conv2d(1, 32, kernel_size=3, padding=1),
+            nn.BatchNorm2d(32),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(32, 32, kernel_size=3, padding=1),
+            nn.BatchNorm2d(32), 
+            nn.ReLU(inplace=True),
+            nn.MaxPool2d(2, 2),
+            
+            # Second conv block
+            nn.Conv2d(32, 64, kernel_size=3, padding=1),
+            nn.BatchNorm2d(64),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(64, 64, kernel_size=3, padding=1),
+            nn.BatchNorm2d(64),
+            nn.ReLU(inplace=True),
+            nn.MaxPool2d(2, 2),
+            
+            # Third conv block
+            nn.Conv2d(64, 128, kernel_size=3, padding=1),
+            nn.BatchNorm2d(128),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(128, 128, kernel_size=3, padding=1),
+            nn.BatchNorm2d(128),
+            nn.ReLU(inplace=True),
+            nn.MaxPool2d(2, 2),
+        )
+        
+        # Adaptive pooling to handle different input sizes
+        self.adaptive_pool = nn.AdaptiveAvgPool2d((8, 8))
+        
+        # Classifier
+        self.classifier = nn.Sequential(
+            nn.Linear(128 * 8 * 8, 512),
+            nn.BatchNorm1d(512),
+            nn.ReLU(inplace=True),
+            nn.Dropout(0.5),
+            nn.Linear(512, 256),
+            nn.BatchNorm1d(256),
+            nn.ReLU(inplace=True),
+            nn.Dropout(0.3),
+            nn.Linear(256, num_classes)
+        )
+
+    def forward(self, x):
+        x = self.features(x)
+        x = self.adaptive_pool(x)
+        x = x.view(x.size(0), -1)
+        x = self.classifier(x)
+        return x
+
+# Initialize Flask app and configs
 app = Flask(__name__)
-app.secret_key = os.urandom(24)  # Required for session management
-app.permanent_session_lifetime = timedelta(days=7)  # Session expires after 7 days
+app.secret_key = os.urandom(24)
+app.permanent_session_lifetime = timedelta(days=7)
+
+# Set up model and device
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+# Load the trained model
+checkpoint_path = "model_checkpoint1.pth"
+if os.path.exists(checkpoint_path):
+    checkpoint = torch.load(checkpoint_path, map_location=device)
+    # Get number of classes from the checkpoint
+    output_size = checkpoint['model_state_dict']['classifier.8.bias'].size(0)
+    model = ImprovedCNN(num_classes=output_size).to(device)
+    model.load_state_dict(checkpoint['model_state_dict'])
+    model.eval()
+    class_names = checkpoint.get('classes', [f'Class_{i}' for i in range(output_size)])  # Default if not saved
+else:
+    print("Warning: Model checkpoint not found!")
+    model = ImprovedCNN(num_classes=9).to(device)  # Default to 9 classes if no checkpoint
+
+# Image transformation pipeline
+image_size = 128  # Must match training size
+transform = transforms.Compose([
+    transforms.Resize((image_size, image_size)),
+    transforms.ToTensor(),
+    transforms.Normalize((0.5,), (0.5,))
+])
 
 # Temporary user storage (replace with database in production)
 users = {
     'admin@silifault.com': {
-        'password': generate_password_hash('admin123'),
+        'password': generate_password_hash('password'),
         'name': 'Admin User'
     }
 }
@@ -117,6 +204,33 @@ def upload_page():
 def about():
     return render_template('about.html')
 
+def predict_image(image_path):
+    """Predicts whether a wafer image contains defects."""
+    try:
+        # Open and preprocess image
+        image = Image.open(image_path).convert('L')  # Convert to grayscale
+        image_tensor = transform(image).unsqueeze(0).to(device)  # Add batch dimension
+        
+        # Make prediction
+        with torch.no_grad():
+            outputs = model(image_tensor)
+            probabilities = torch.softmax(outputs, dim=1)
+            confidence, predicted = torch.max(probabilities, 1)
+            
+        prediction_class = class_names[predicted.item()]
+        confidence_score = confidence.item() * 100
+        
+        return {
+            'prediction': prediction_class,
+            'confidence': confidence_score,
+            'success': True
+        }
+    except Exception as e:
+        return {
+            'success': False,
+            'error': str(e)
+        }
+
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if 'user' not in session:
@@ -130,17 +244,33 @@ def upload_file():
     if file.filename == '':
         return jsonify({'error': 'No selected file'}), 400
     
-    if file:
-        # Save the file temporarily or process it
-        # Here you would normally add your AI processing logic
-        # For demo purposes, we'll just return a success message
-        return jsonify({
-            'success': True,
-            'message': 'File uploaded successfully',
-            'filename': file.filename,
-            'defects_detected': 3,
-            'accuracy': 99.7
-        })
+    if file and file.filename.lower().endswith(('.png', '.jpg', '.jpeg', '.tiff', '.bmp')):
+        # Create uploads directory if it doesn't exist
+        upload_dir = os.path.join(app.root_path, 'static', 'uploads')
+        os.makedirs(upload_dir, exist_ok=True)
+        
+        # Save the uploaded file
+        file_path = os.path.join(upload_dir, file.filename)
+        file.save(file_path)
+        
+        # Make prediction
+        result = predict_image(file_path)
+        print(result)
+        
+        if result['success']:
+            return jsonify({
+                'success': True,
+                'filename': file.filename,
+                'prediction': result['prediction'],
+                'confidence': f"{result['confidence']:.2f}%"
+            })
+        else:
+            return jsonify({
+                'success': False,
+                'error': result['error']
+            })
+    
+    return jsonify({'error': 'Invalid file type'}), 400
 
 if __name__ == '__main__':
-    app.run(debug=True) 
+    app.run(debug=True)

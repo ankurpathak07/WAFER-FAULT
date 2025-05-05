@@ -192,17 +192,24 @@ document.addEventListener('DOMContentLoaded', function() {
             const filenameElement = document.querySelector('.result-filename');
             const defectsElement = document.querySelector('.result-defects');
             const accuracyElement = document.querySelector('.result-accuracy');
+            const imagePreview = document.querySelector('.image-preview');
             
             if (filenameElement) {
                 filenameElement.textContent = data.filename || 'Unknown';
             }
             
             if (defectsElement) {
-                defectsElement.textContent = data.defects_detected !== undefined ? data.defects_detected : 'N/A';
+                defectsElement.textContent = data.prediction || 'N/A';
             }
             
             if (accuracyElement) {
-                accuracyElement.textContent = data.accuracy !== undefined ? data.accuracy + '%' : 'N/A';
+                accuracyElement.textContent = data.confidence || 'N/A';
+            }
+
+            // Display uploaded image preview
+            if (imagePreview && data.filename) {
+                imagePreview.innerHTML = `<img src="/static/uploads/${data.filename}" alt="Uploaded wafer" style="max-width: 100%; height: auto;">`;
+                imagePreview.style.display = 'block';
             }
         }
     }
@@ -371,4 +378,4 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-}); 
+});

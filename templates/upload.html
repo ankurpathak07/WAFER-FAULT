@@ -8,7 +8,7 @@
         <h2 class="section-title fade-in">Upload Your Wafer Image</h2>
         
         <div class="upload-container fade-in">
-            <div class="upload-area">
+            <div class="upload-area" id="drop-zone">
                 <div class="upload-icon">
                     <i class="fas fa-upload"></i>
                 </div>
@@ -20,7 +20,10 @@
             
             <button class="btn btn-primary upload-btn">Upload Wafer Image</button>
             
-            <div class="results-container">
+            <div class="results-container" style="display: none;">
+                <!-- Image Preview Section -->
+                <div class="image-preview" style="margin: 20px 0; text-align: center; display: none;"></div>
+                
                 <h3 class="results-title">Analysis Results</h3>
                 <div class="results-card">
                     <div class="result-item">
@@ -40,4 +43,4 @@
         </div>
     </div>
 </section>
-{% endblock %} 
+{% endblock %}
