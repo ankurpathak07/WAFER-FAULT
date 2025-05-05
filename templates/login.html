@@ -1,0 +1,275 @@
+{% extends "base.html" %}
+
+{% block body_class %}auth-page{% endblock %}
+
+{% block title %}Login - SiliFault{% endblock %}
+
+{% block content %}
+<div class="page-wrapper">
+    <div class="circuit-lines"></div>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="card-header">
+                <div class="logo-container">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <h1>Welcome Back</h1>
+                <p>Don't have an account yet? <a href="{{ url_for('register') }}">Sign up</a></p>
+            </div>
+
+            <form class="login-form" method="POST" action="{{ url_for('login') }}">
+                <div class="form-group">
+                    <input type="email" id="email" name="email" required placeholder="Email address">
+                    <i class="far fa-envelope"></i>
+                </div>
+                
+                <div class="form-group">
+                    <input type="password" id="password" name="password" required placeholder="Password">
+                    <i class="fas fa-lock"></i>
+                </div>
+                
+                <button type="submit" class="login-button">
+                    Login
+                </button>
+
+                <div class="or-divider">
+                    <span>OR</span>
+                </div>
+
+                <div class="social-login">
+                    <button type="button" class="social-btn apple">
+                        <i class="fab fa-apple"></i>
+                    </button>
+                    <button type="button" class="social-btn google">
+                        <i class="fab fa-google"></i>
+                    </button>
+                    <button type="button" class="social-btn twitter">
+                        <i class="fab fa-twitter"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_head %}
+<style>
+    body.auth-page {
+        background: #000;
+        min-height: 100vh;
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    .page-wrapper {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        background: linear-gradient(45deg, rgba(0,0,0,0.97) 0%, rgba(0,0,0,0.95) 100%);
+        overflow: hidden;
+    }
+
+    .circuit-lines {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url('/static/images/circuit-bg.png');
+        background-size: cover;
+        background-position: center;
+        opacity: 0.1;
+        pointer-events: none;
+    }
+
+    .login-container {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 400px;
+        padding: 20px;
+    }
+
+    .login-card {
+        background: rgba(28, 28, 28, 0.95);
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+    }
+
+    .card-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .logo-container {
+        width: 48px;
+        height: 48px;
+        margin: 0 auto 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logo-container i {
+        font-size: 2rem;
+        color: #2196f3;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% { opacity: 1; }
+        50% { opacity: 0.6; }
+        100% { opacity: 1; }
+    }
+
+    .card-header h1 {
+        color: #fff;
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+    }
+
+    .card-header p {
+        color: #888;
+        font-size: 0.9rem;
+    }
+
+    .card-header a {
+        color: #2196f3;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .form-group {
+        position: relative;
+        margin-bottom: 1rem;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 12px 16px 12px 40px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        color: #fff;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-group input:focus {
+        outline: none;
+        border-color: #2196f3;
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .form-group i {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #666;
+        font-size: 1rem;
+    }
+
+    .login-button {
+        width: 100%;
+        padding: 12px;
+        background: #2196f3;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-bottom: 1.5rem;
+    }
+
+    .login-button:hover {
+        background: #1976d2;
+        transform: translateY(-1px);
+    }
+
+    .or-divider {
+        text-align: center;
+        position: relative;
+        margin: 1.5rem 0;
+    }
+
+    .or-divider::before,
+    .or-divider::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        width: calc(50% - 30px);
+        height: 1px;
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .or-divider::before {
+        left: 0;
+    }
+
+    .or-divider::after {
+        right: 0;
+    }
+
+    .or-divider span {
+        background: rgba(28, 28, 28, 0.95);
+        color: #666;
+        padding: 0 15px;
+        font-size: 0.9rem;
+    }
+
+    .social-login {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    .social-btn {
+        width: 50px;
+        height: 50px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.05);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .social-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px);
+    }
+
+    .social-btn i {
+        font-size: 1.2rem;
+    }
+
+    @media (max-width: 480px) {
+        .login-container {
+            padding: 15px;
+        }
+
+        .login-card {
+            padding: 1.5rem;
+        }
+
+        .social-btn {
+            width: 45px;
+            height: 45px;
+        }
+    }
+</style>
+{% endblock %} 

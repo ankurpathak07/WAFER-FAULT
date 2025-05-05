@@ -4,7 +4,7 @@
 <!-- About Hero Section -->
 <section class="about-hero" style="background: linear-gradient(rgba(17, 18, 13, 0.75), rgba(17, 18, 13, 0.75)), url('{{ url_for('static', filename='images/about-bg.jpg') }}'); background-size: cover; background-position: center;">
     <div class="container">
-        <div class="about-hero-content fade-in">
+        <div class="about-hero-content animate__animated animate__fadeInUp">
             <h1>About SiliFault</h1>
             <p>Advanced AI technology for semiconductor manufacturing quality control</p>
         </div>
@@ -15,7 +15,7 @@
 <section class="about-section section">
     <div class="container">
         <div class="about-grid">
-            <div class="about-content fade-in">
+            <div class="about-content animate__animated animate__fadeInLeft">
                 <h2 class="section-title">Our Mission</h2>
                 <p>SiliFault was founded with a clear mission: to revolutionize wafer defect detection in semiconductor manufacturing using cutting-edge artificial intelligence.</p>
                 <p>We're committed to helping semiconductor manufacturers improve yield rates, reduce costs, and enhance product quality through precise, reliable, and fast defect detection.</p>
@@ -23,14 +23,14 @@
                 <h2 class="section-title mt-5">Our Technology</h2>
                 <p>Our AI-powered wafer defect detection system uses advanced deep learning algorithms trained on millions of wafer images to identify and classify defects with unprecedented accuracy and speed.</p>
                 <ul class="tech-features">
-                    <li><strong>Computer Vision:</strong> Custom-built neural networks designed specifically for semiconductor wafer inspection</li>
-                    <li><strong>Machine Learning:</strong> Self-improving models that get more accurate with each analysis</li>
-                    <li><strong>Big Data:</strong> Sophisticated data processing infrastructure to handle high-volume manufacturing environments</li>
+                    <li class="hover-grow"><strong>Computer Vision:</strong> Custom-built neural networks designed specifically for semiconductor wafer inspection</li>
+                    <li class="hover-grow"><strong>Machine Learning:</strong> Self-improving models that get more accurate with each analysis</li>
+                    <li class="hover-grow"><strong>Big Data:</strong> Sophisticated data processing infrastructure to handle high-volume manufacturing environments</li>
                 </ul>
             </div>
             
-            <div class="about-image-container fade-in">
-                <img src="{{ url_for('static', filename='images/about-tech.jpg') }}" alt="SiliFault Technology" class="about-image">
+            <div class="about-image-container animate__animated animate__fadeInRight">
+                <img src="{{ url_for('static', filename='images/about-tech.jpg') }}" alt="SiliFault Technology" class="about-image hover-zoom">
             </div>
         </div>
     </div>
@@ -39,70 +39,70 @@
 <!-- Wafer Fault Information Section -->
 <section class="wafer-fault-section section bg-light">
     <div class="container">
-        <h2 class="section-title fade-in">Understanding Wafer Faults</h2>
-        <p class="section-description fade-in">In semiconductor manufacturing, especially CPU production, wafer defects can significantly impact yield and performance</p>
+        <h2 class="section-title animate__animated animate__fadeIn">Understanding Wafer Faults</h2>
+        <p class="section-description animate__animated animate__fadeIn animate__delay-1s">In semiconductor manufacturing, especially CPU production, wafer defects can significantly impact yield and performance</p>
         
         <div class="wafer-grid">
-            <div class="wafer-content fade-in">
+            <div class="wafer-content animate__animated animate__fadeInLeft">
                 <h3>Impact of Wafer Defects in CPU Manufacturing</h3>
                 <p>Semiconductor wafers are the foundation of modern CPUs and other integrated circuits. A single 300mm wafer can contain hundreds of CPU dies, with each modern processor containing billions of transistors.</p>
                 <p>Even microscopic defects can render entire sections of a wafer unusable, directly impacting manufacturing yields and production costs. In high-end CPU manufacturing, yield rates are crucial for profitability, with defects potentially causing losses of millions of dollars per production run.</p>
                 
                 <h3>Common Causes of Wafer Defects</h3>
                 <ul class="defect-causes">
-                    <li><strong>Contamination:</strong> Dust particles, chemical residues, or other contaminants</li>
-                    <li><strong>Process Variations:</strong> Inconsistencies in etching, deposition, or lithography</li>
-                    <li><strong>Material Impurities:</strong> Defects in the silicon substrate or other materials</li>
-                    <li><strong>Handling Damage:</strong> Scratches or cracks from robotic handling systems</li>
-                    <li><strong>Environmental Factors:</strong> Temperature fluctuations or vibrations during manufacturing</li>
+                    <li class="hover-grow"><strong>Contamination:</strong> Dust particles, chemical residues, or other contaminants</li>
+                    <li class="hover-grow"><strong>Process Variations:</strong> Inconsistencies in etching, deposition, or lithography</li>
+                    <li class="hover-grow"><strong>Material Impurities:</strong> Defects in the silicon substrate or other materials</li>
+                    <li class="hover-grow"><strong>Handling Damage:</strong> Scratches or cracks from robotic handling systems</li>
+                    <li class="hover-grow"><strong>Environmental Factors:</strong> Temperature fluctuations or vibrations during manufacturing</li>
                 </ul>
             </div>
             
-            <div class="wafer-image-container fade-in">
-                <img src="{{ url_for('static', filename='images/wafer-manufacturing.jpg') }}" alt="Wafer Manufacturing Process" class="wafer-image">
+            <div class="wafer-image-container animate__animated animate__fadeInRight">
+                <img src="{{ url_for('static', filename='images/wafer-manufacturing.jpg') }}" alt="Wafer Manufacturing Process" class="wafer-image hover-zoom">
             </div>
         </div>
         
-        <div class="defect-types-container fade-in">
+        <div class="defect-types-container animate__animated animate__fadeIn">
             <h3 class="defect-title">Common Defect Types Our System Detects</h3>
             
             <div class="defect-grid">
-                <div class="defect-card">
+                <div class="defect-card hover-grow hover-rotate">
                     <div class="defect-icon"><i class="fas fa-dot-circle"></i></div>
                     <h4>Particle Contamination</h4>
                     <p>Foreign particles that land on the wafer surface during processing, causing pattern deformation.</p>
                     <p><strong>Impact:</strong> Circuit shorts, open circuits, or pattern distortion</p>
                 </div>
                 
-                <div class="defect-card">
+                <div class="defect-card hover-grow hover-rotate">
                     <div class="defect-icon"><i class="fas fa-exclamation-circle"></i></div>
                     <h4>Scratch Defects</h4>
                     <p>Linear marks caused by handling issues or polishing processes that damage wafer surfaces.</p>
                     <p><strong>Impact:</strong> Broken connections, yield loss across multiple dies</p>
                 </div>
                 
-                <div class="defect-card">
+                <div class="defect-card hover-grow hover-rotate">
                     <div class="defect-icon"><i class="fas fa-water"></i></div>
                     <h4>Process-Induced Pattern Defects</h4>
                     <p>Abnormalities in circuit patterns due to lithography, etching, or deposition problems.</p>
                     <p><strong>Impact:</strong> Functional failures in CPU logic circuits</p>
                 </div>
                 
-                <div class="defect-card">
+                <div class="defect-card hover-grow hover-rotate">
                     <div class="defect-icon"><i class="fas fa-bullseye"></i></div>
                     <h4>Hot Spots</h4>
                     <p>Areas where design patterns are particularly difficult to manufacture consistently.</p>
                     <p><strong>Impact:</strong> Inconsistent performance, potential failures under stress</p>
                 </div>
                 
-                <div class="defect-card">
+                <div class="defect-card hover-grow hover-rotate">
                     <div class="defect-icon"><i class="fas fa-layer-group"></i></div>
                     <h4>Film Residue</h4>
                     <p>Unwanted material remaining after chemical processes that should have removed them.</p>
                     <p><strong>Impact:</strong> Insulation failures, increased power consumption</p>
                 </div>
                 
-                <div class="defect-card">
+                <div class="defect-card hover-grow hover-rotate">
                     <div class="defect-icon"><i class="fas fa-puzzle-piece"></i></div>
                     <h4>Crystal Defects</h4>
                     <p>Flaws in the silicon crystal structure impacting the fundamental electrical properties.</p>
@@ -110,13 +110,13 @@
                 </div>
             </div>
             
-            <div class="detection-metrics fade-in">
+            <div class="detection-metrics animate__animated animate__fadeInUp">
                 <h4>Our Detection Capabilities</h4>
                 <ul>
-                    <li><strong>Size Range:</strong> Defects as small as 10nm can be detected</li>
-                    <li><strong>Processing Speed:</strong> Analysis of full 300mm wafer in under 5 minutes</li>
-                    <li><strong>False Positive Rate:</strong> Less than 0.1%</li>
-                    <li><strong>Classification Accuracy:</strong> 99.7% across all defect types</li>
+                    <li class="hover-grow"><strong>Size Range:</strong> Defects as small as 10nm can be detected</li>
+                    <li class="hover-grow"><strong>Processing Speed:</strong> Analysis of full 300mm wafer in under 5 minutes</li>
+                    <li class="hover-grow"><strong>False Positive Rate:</strong> Less than 0.1%</li>
+                    <li class="hover-grow"><strong>Classification Accuracy:</strong> 99.7% across all defect types</li>
                 </ul>
             </div>
         </div>
@@ -126,14 +126,18 @@
 <!-- Team Section -->
 <section class="team-section section">
     <div class="container">
-        <h2 class="section-title fade-in">Our Team</h2>
-        <p class="section-description fade-in">Meet the experts behind SiliFault's advanced wafer defect detection technology</p>
+        <h2 class="section-title animate__animated animate__fadeIn">Our Team</h2>
+        <p class="section-description animate__animated animate__fadeIn animate__delay-1s">Meet the experts behind SiliFault's advanced wafer defect detection technology</p>
         
         <div class="team-grid">
             <!-- Team Member 1 -->
-            <div class="team-member fade-in">
-                <div class="team-member-image">
+            <div class="team-member animate__animated animate__fadeInUp">
+                <div class="team-member-image hover-grow">
                     <img src="{{ url_for('static', filename='images/team-1.jpg') }}" alt="Team Member">
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
                 </div>
                 <h3 class="team-member-name">Dr. Sarah Chen</h3>
                 <p class="team-member-position">Chief AI Scientist</p>
@@ -141,9 +145,13 @@
             </div>
             
             <!-- Team Member 2 -->
-            <div class="team-member fade-in">
-                <div class="team-member-image">
+            <div class="team-member animate__animated animate__fadeInUp animate__delay-1s">
+                <div class="team-member-image hover-grow">
                     <img src="{{ url_for('static', filename='images/team-2.jpg') }}" alt="Team Member">
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
                 </div>
                 <h3 class="team-member-name">James Rodriguez</h3>
                 <p class="team-member-position">CTO</p>
@@ -151,9 +159,13 @@
             </div>
             
             <!-- Team Member 3 -->
-            <div class="team-member fade-in">
-                <div class="team-member-image">
+            <div class="team-member animate__animated animate__fadeInUp animate__delay-2s">
+                <div class="team-member-image hover-grow">
                     <img src="{{ url_for('static', filename='images/team-3.jpg') }}" alt="Team Member">
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
                 </div>
                 <h3 class="team-member-name">Dr. Michael Kim</h3>
                 <p class="team-member-position">Lead ML Engineer</p>
@@ -166,52 +178,52 @@
 <!-- Timeline Section -->
 <section class="timeline-section section">
     <div class="container">
-        <h2 class="section-title fade-in">Our Journey</h2>
+        <h2 class="section-title animate__animated animate__fadeIn">Our Journey</h2>
         
         <div class="timeline">
-            <div class="timeline-item fade-in">
-                <div class="timeline-year">2018</div>
-                <div class="timeline-content">
+            <div class="timeline-item animate__animated animate__fadeInLeft">
+                <div class="timeline-year pulse-animate">2018</div>
+                <div class="timeline-content hover-grow">
                     <h3>Company Founded</h3>
                     <p>SiliFault was established with seed funding from leading tech investors.</p>
                 </div>
             </div>
             
-            <div class="timeline-item fade-in">
-                <div class="timeline-year">2019</div>
-                <div class="timeline-content">
+            <div class="timeline-item animate__animated animate__fadeInRight">
+                <div class="timeline-year pulse-animate">2019</div>
+                <div class="timeline-content hover-grow">
                     <h3>First Prototype</h3>
                     <p>Developed first working prototype with 95% accuracy in defect detection.</p>
                 </div>
             </div>
             
-            <div class="timeline-item fade-in">
-                <div class="timeline-year">2020</div>
-                <div class="timeline-content">
+            <div class="timeline-item animate__animated animate__fadeInLeft">
+                <div class="timeline-year pulse-animate">2020</div>
+                <div class="timeline-content hover-grow">
                     <h3>Series A Funding</h3>
                     <p>Secured $10M in Series A funding to scale our technology and team.</p>
                 </div>
             </div>
             
-            <div class="timeline-item fade-in">
-                <div class="timeline-year">2021</div>
-                <div class="timeline-content">
+            <div class="timeline-item animate__animated animate__fadeInRight">
+                <div class="timeline-year pulse-animate">2021</div>
+                <div class="timeline-content hover-grow">
                     <h3>Major Partnerships</h3>
                     <p>Partnered with two leading semiconductor manufacturers for pilot programs.</p>
                 </div>
             </div>
             
-            <div class="timeline-item fade-in">
-                <div class="timeline-year">2022</div>
-                <div class="timeline-content">
+            <div class="timeline-item animate__animated animate__fadeInLeft">
+                <div class="timeline-year pulse-animate">2022</div>
+                <div class="timeline-content hover-grow">
                     <h3>Commercial Launch</h3>
                     <p>Officially launched SiliFault with 99.9% detection accuracy.</p>
                 </div>
             </div>
             
-            <div class="timeline-item fade-in">
-                <div class="timeline-year">2023</div>
-                <div class="timeline-content">
+            <div class="timeline-item animate__animated animate__fadeInRight">
+                <div class="timeline-year pulse-animate">2023</div>
+                <div class="timeline-content hover-grow">
                     <h3>Global Expansion</h3>
                     <p>Expanded operations to Asia and Europe to serve international clients.</p>
                 </div>
@@ -223,20 +235,20 @@
 <!-- Partners Section -->
 <section class="partners-section section">
     <div class="container">
-        <h2 class="section-title fade-in">Our Partners</h2>
-        <p class="section-description fade-in">Trusted by leading organizations in semiconductor manufacturing</p>
+        <h2 class="section-title animate__animated animate__fadeIn">Our Partners</h2>
+        <p class="section-description animate__animated animate__fadeIn animate__delay-1s">Trusted by leading organizations in semiconductor manufacturing</p>
         
         <div class="partners-grid">
-            <div class="partner-logo fade-in">
+            <div class="partner-logo animate__animated animate__fadeIn hover-grow">
                 <img src="{{ url_for('static', filename='images/partner-1.png') }}" alt="Partner Logo">
             </div>
-            <div class="partner-logo fade-in">
+            <div class="partner-logo animate__animated animate__fadeIn animate__delay-1s hover-grow">
                 <img src="{{ url_for('static', filename='images/partner-2.png') }}" alt="Partner Logo">
             </div>
-            <div class="partner-logo fade-in">
+            <div class="partner-logo animate__animated animate__fadeIn animate__delay-2s hover-grow">
                 <img src="{{ url_for('static', filename='images/partner-3.png') }}" alt="Partner Logo">
             </div>
-            <div class="partner-logo fade-in">
+            <div class="partner-logo animate__animated animate__fadeIn animate__delay-3s hover-grow">
                 <img src="{{ url_for('static', filename='images/partner-4.png') }}" alt="Partner Logo">
             </div>
         </div>
@@ -246,11 +258,129 @@
 <!-- CTA Section -->
 <section class="cta-section section">
     <div class="container">
-        <div class="cta-content fade-in">
+        <div class="cta-content animate__animated animate__fadeInUp">
             <h2>Ready to transform your wafer inspection process?</h2>
             <p>Contact us today to learn how SiliFault can improve your semiconductor manufacturing quality and yield.</p>
-            <a href="#contact" class="btn btn-primary">Get in Touch</a>
+            <a href="#contact" class="btn btn-primary hover-grow pulse-animate">Get in Touch</a>
         </div>
     </div>
 </section>
-{% endblock %} 
+
+<style>
+    /* Animation Classes */
+    .hover-grow {
+        transition: all 0.3s ease;
+    }
+    
+    .hover-grow:hover {
+        transform: scale(1.03);
+        z-index: 10;
+    }
+    
+    .hover-zoom {
+        transition: all 0.3s ease;
+    }
+    
+    .hover-zoom:hover {
+        transform: scale(1.05);
+    }
+    
+    .hover-rotate {
+        transition: all 0.3s ease;
+    }
+    
+    .hover-rotate:hover {
+        transform: rotate(1deg);
+    }
+    
+    .pulse-animate {
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+    
+    /* Team Member Hover Effects */
+    .team-member-image {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+    
+    .team-member-image .social-links {
+        position: absolute;
+        bottom: -50px;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.7);
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        transition: all 0.3s ease;
+    }
+    
+    .team-member-image:hover .social-links {
+        bottom: 0;
+    }
+    
+    .team-member-image .social-links a {
+        color: white;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+    }
+    
+    .team-member-image .social-links a:hover {
+        transform: scale(1.2);
+        color: #4e9af1;
+    }
+    
+    /* Defect Card Hover Effects */
+    .defect-card {
+        transition: all 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .defect-card:hover {
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Timeline Year Hover */
+    .timeline-year {
+        transition: all 0.3s ease;
+    }
+    
+    .timeline-year:hover {
+        transform: scale(1.1);
+        background-color: #4e9af1;
+        color: white;
+    }
+</style>
+
+<!-- Add Animate.css for scroll animations -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+<script>
+    // Add scroll animation triggers
+    document.addEventListener('DOMContentLoaded', function() {
+        const animateElements = document.querySelectorAll('.animate__animated');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add(entry.target.dataset.animate);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        animateElements.forEach(element => {
+            observer.observe(element);
+        });
+    });
+</script>
+{% endblock %}

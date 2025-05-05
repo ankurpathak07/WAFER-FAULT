@@ -19,7 +19,21 @@
     
     {% block extra_head %}{% endblock %}
 </head>
-<body>
+<body class="{% block body_class %}{% endblock %}">
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="flash-message flash-{{ category }}">
+                        {{ message }}
+                        <button class="flash-close" onclick="this.parentElement.remove()">&times;</button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
     <!-- Header & Navigation -->
     <header>
         <div class="container">
@@ -32,6 +46,11 @@
                     <li><a href="/upload">Upload</a></li>
                     <li><a href="/about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
+                    {% if session.user %}
+                        <li><a href="/logout">Logout</a></li>
+                    {% else %}
+                        <li><a href="/login">Login</a></li>
+                    {% endif %}
                 </ul>
                 
                 <div class="burger">
