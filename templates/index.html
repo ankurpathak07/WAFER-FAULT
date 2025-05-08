@@ -3,12 +3,12 @@
 {% block content %}
 <!-- Hero Section -->
 <section class="hero" style="background: linear-gradient(rgba(17, 18, 13, 0.75), rgba(17, 18, 13, 0.75)), url('{{ url_for('static', filename='images/hero-bg.jpg') }}'); background-size: cover; background-position: center;">
-    <div class="hero-content fade-in">
-        <h1>Advanced Wafer <br>Defect Detection</h1>
-        <p>Leverage the power of AI to detect and analyze wafer defects with unprecedented accuracy and speed.</p>
+    <div class="hero-content animate__animated animate__fadeIn">
+        <h1 class="animate__animated animate__fadeInUp">Advanced Wafer <br>Defect Detection</h1>
+        <p class="animate__animated animate__fadeInUp animate__delay-1s">Leverage the power of AI to detect and analyze wafer defects with unprecedented accuracy and speed.</p>
         <div class="hero-btns">
-            <a href="{{ url_for('upload_page') }}" class="btn btn-primary">Get Started</a>
-            <a href="#features" class="btn btn-secondary">Learn More</a>
+            <a href="{{ url_for('upload_page') }}" class="btn btn-primary animate__animated animate__fadeInUp animate__delay-2s hover-grow pulse-on-hover">Get Started</a>
+            <a href="#features" class="btn btn-secondary animate__animated animate__fadeInUp animate__delay-2s hover-grow">Learn More</a>
         </div>
     </div>
 </section>
@@ -16,97 +16,97 @@
 <!-- Features Section -->
 <section id="features" class="features section">
     <div class="container">
-        <h2 class="section-title fade-in">Features Overview</h2>
+        <h2 class="section-title animate__animated animate__fadeIn">Features Overview</h2>
         
         <div class="features-grid">
             <!-- Feature 1 -->
-            <div class="feature-card fade-in">
-                <div class="feature-icon">
+            <div class="feature-card animate__animated animate__fadeInUp">
+                <div class="feature-icon hover-3d">
                     <i class="fas fa-brain"></i>
                 </div>
                 <h3 class="feature-title">AI-Powered Analysis</h3>
                 <ul>
-                    <li>State-of-the-art machine learning algorithms</li>
-                    <li>Real-time processing</li>
-                    <li>Pattern recognition</li>
-                    <li>Automated classification</li>
+                    <li><i class="fas fa-check-circle"></i> State-of-the-art machine learning algorithms</li>
+                    <li><i class="fas fa-check-circle"></i> Real-time processing</li>
+                    <li><i class="fas fa-check-circle"></i> Pattern recognition</li>
+                    <li><i class="fas fa-check-circle"></i> Automated classification</li>
                 </ul>
-                <a href="#" class="learn-more">Learn More</a>
+                <a href="#" class="learn-more hover-underline">Learn More <i class="fas fa-arrow-right"></i></a>
             </div>
             
             <!-- Feature 2 -->
-            <div class="feature-card fade-in">
-                <div class="feature-icon">
+            <div class="feature-card animate__animated animate__fadeInUp animate__delay-1s">
+                <div class="feature-icon hover-3d">
                     <i class="fas fa-bolt"></i>
                 </div>
                 <h3 class="feature-title">Real-Time Processing</h3>
                 <ul>
-                    <li>50ms processing time</li>
-                    <li>High throughput</li>
-                    <li>Parallel processing</li>
-                    <li>Low latency</li>
+                    <li><i class="fas fa-check-circle"></i> 50ms processing time</li>
+                    <li><i class="fas fa-check-circle"></i> High throughput</li>
+                    <li><i class="fas fa-check-circle"></i> Parallel processing</li>
+                    <li><i class="fas fa-check-circle"></i> Low latency</li>
                 </ul>
-                <a href="#" class="learn-more">Learn More</a>
+                <a href="#" class="learn-more hover-underline">Learn More <i class="fas fa-arrow-right"></i></a>
             </div>
             
             <!-- Feature 3 -->
-            <div class="feature-card fade-in">
-                <div class="feature-icon">
+            <div class="feature-card animate__animated animate__fadeInUp animate__delay-2s">
+                <div class="feature-icon hover-3d">
                     <i class="fas fa-chart-line"></i>
                 </div>
                 <h3 class="feature-title">Detailed Reports</h3>
                 <ul>
-                    <li>Custom reports</li>
-                    <li>Data visualization</li>
-                    <li>Trend analysis</li>
-                    <li>Export capabilities</li>
+                    <li><i class="fas fa-check-circle"></i> Custom reports</li>
+                    <li><i class="fas fa-check-circle"></i> Data visualization</li>
+                    <li><i class="fas fa-check-circle"></i> Trend analysis</li>
+                    <li><i class="fas fa-check-circle"></i> Export capabilities</li>
                 </ul>
-                <a href="#" class="learn-more">Learn More</a>
+                <a href="#" class="learn-more hover-underline">Learn More <i class="fas fa-arrow-right"></i></a>
             </div>
             
             <!-- Feature 4 -->
-            <div class="feature-card fade-in">
-                <div class="feature-icon">
+            <div class="feature-card animate__animated animate__fadeInUp">
+                <div class="feature-icon hover-3d">
                     <i class="fas fa-check-circle"></i>
                 </div>
                 <h3 class="feature-title">Quality Assurance</h3>
                 <ul>
-                    <li>99.9% accuracy</li>
-                    <li>Quality metrics</li>
-                    <li>Compliance checks</li>
-                    <li>Audit trails</li>
+                    <li><i class="fas fa-check-circle"></i> 99.9% accuracy</li>
+                    <li><i class="fas fa-check-circle"></i> Quality metrics</li>
+                    <li><i class="fas fa-check-circle"></i> Compliance checks</li>
+                    <li><i class="fas fa-check-circle"></i> Audit trails</li>
                 </ul>
-                <a href="#" class="learn-more">Learn More</a>
+                <a href="#" class="learn-more hover-underline">Learn More <i class="fas fa-arrow-right"></i></a>
             </div>
             
             <!-- Feature 5 -->
-            <div class="feature-card fade-in">
-                <div class="feature-icon">
+            <div class="feature-card animate__animated animate__fadeInUp animate__delay-1s">
+                <div class="feature-icon hover-3d">
                     <i class="fas fa-plug"></i>
                 </div>
                 <h3 class="feature-title">Integration Ready</h3>
                 <ul>
-                    <li>API support</li>
-                    <li>Custom workflows</li>
-                    <li>Data export</li>
-                    <li>Third-party tools</li>
+                    <li><i class="fas fa-check-circle"></i> API support</li>
+                    <li><i class="fas fa-check-circle"></i> Custom workflows</li>
+                    <li><i class="fas fa-check-circle"></i> Data export</li>
+                    <li><i class="fas fa-check-circle"></i> Third-party tools</li>
                 </ul>
-                <a href="#" class="learn-more">Learn More</a>
+                <a href="#" class="learn-more hover-underline">Learn More <i class="fas fa-arrow-right"></i></a>
             </div>
             
             <!-- Feature 6 -->
-            <div class="feature-card fade-in">
-                <div class="feature-icon">
+            <div class="feature-card animate__animated animate__fadeInUp animate__delay-2s">
+                <div class="feature-icon hover-3d">
                     <i class="fas fa-shield-alt"></i>
                 </div>
                 <h3 class="feature-title">Security & Compliance</h3>
                 <ul>
-                    <li>Data encryption</li>
-                    <li>Access control</li>
-                    <li>Audit logging</li>
-                    <li>Compliance reports</li>
+                    <li><i class="fas fa-check-circle"></i> Data encryption</li>
+                    <li><i class="fas fa-check-circle"></i> Access control</li>
+                    <li><i class="fas fa-check-circle"></i> Audit logging</li>
+                    <li><i class="fas fa-check-circle"></i> Compliance reports</li>
                 </ul>
-                <a href="#" class="learn-more">Learn More</a>
+                <a href="#" class="learn-more hover-underline">Learn More <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
     </div>
@@ -116,100 +116,220 @@
 <section class="stats">
     <div class="container">
         <div class="stats-container">
-            <div class="stat-item fade-in">
-                <div class="stat-number">99.9%</div>
+            <div class="stat-item animate__animated animate__zoomIn">
+                <div class="stat-number counter" data-target="99.9">0</div>
                 <div class="stat-text">Detection Accuracy</div>
             </div>
             
-            <div class="stat-item fade-in">
-                <div class="stat-number">50ms</div>
-                <div class="stat-text">Processing Time</div>
+            <div class="stat-item animate__animated animate__zoomIn animate__delay-1s">
+                <div class="stat-number counter" data-target="50">0</div>
+                <div class="stat-text">Processing Time (ms)</div>
             </div>
             
-            <div class="stat-item fade-in">
-                <div class="stat-number">10+</div>
+            <div class="stat-item animate__animated animate__zoomIn animate__delay-2s">
+                <div class="stat-number counter" data-target="10">0</div>
                 <div class="stat-text">Defect Types</div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Upload Section -->
-<!--<section id="upload" class="upload-section section">
-    <div class="container">
-        <h2 class="section-title fade-in">Upload Your Wafer Image</h2>
-        
-        <div class="upload-container fade-in">
-            <div class="upload-area">
-                <div class="upload-icon">
-                    <i class="fas fa-upload"></i>
-                </div>
-                <h3>Drag & Drop your file here</h3>
-                <p>or click to browse files</p>
-                <span class="file-name" style="display: none;"></span>
-                <input type="file" class="file-input" accept="image/*">
-            </div>
-            
-            <button class="btn btn-primary upload-btn">Upload Wafer Image</button>
-            
-            <div class="results-container">
-                <h3 class="results-title">Analysis Results</h3>
-                <div class="results-card">
-                    <div class="result-item">
-                        <span class="result-label">Filename:</span>
-                        <span class="result-value result-filename">-</span>
-                    </div>
-                    <div class="result-item">
-                        <span class="result-label">Defects Detected:</span>
-                        <span class="result-value result-defects">-</span>
-                    </div>
-                    <div class="result-item">
-                        <span class="result-label">Analysis Accuracy:</span>
-                        <span class="result-value result-accuracy">-</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>-->
-
 <!-- CTA Section -->
 <section class="cta section">
     <div class="container">
-        <h2 class="section-title fade-in">Ready to Transform Your Wafer Inspection Process?</h2>
-        <p class="fade-in">Join leading semiconductor manufacturers in revolutionizing quality control with AI-powered defect detection.</p>
-        <a href="{{ url_for('upload_page') }}" class="btn btn-primary fade-in">Start Now</a>
+        <h2 class="section-title animate__animated animate__fadeIn">Ready to Transform Your Wafer Inspection Process?</h2>
+        <p class="animate__animated animate__fadeIn animate__delay-1s">Join leading semiconductor manufacturers in revolutionizing quality control with AI-powered defect detection.</p>
+        <a href="{{ url_for('upload_page') }}" class="btn btn-primary animate__animated animate__fadeIn animate__delay-2s hover-glow">Start Now</a>
     </div>
 </section>
 
-<!-- Contact Section -->
-<section id="contact" class="contact section">
-    <div class="container">
-        <h2 class="section-title fade-in">Contact Info</h2>
+<style>
+    /* Animation Classes */
+    .hover-grow {
+        transition: all 0.3s ease;
+        display: inline-block;
+    }
+    
+    .hover-grow:hover {
+        transform: scale(1.05);
+    }
+    
+    .hover-3d {
+        transition: all 0.3s ease;
+    }
+    
+    .hover-3d:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    .hover-underline {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    .hover-underline::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -4px;
+        left: 0;
+        background-color: currentColor;
+        transition: width 0.3s ease;
+    }
+    
+    .hover-underline:hover::after {
+        width: 100%;
+    }
+    
+    .hover-underline i {
+        transition: transform 0.3s ease;
+    }
+    
+    .hover-underline:hover i {
+        transform: translateX(3px);
+    }
+    
+    .pulse-on-hover {
+        animation: none;
+    }
+    
+    .pulse-on-hover:hover {
+        animation: pulse 1s infinite;
+    }
+    
+    .hover-glow {
+        transition: all 0.3s ease;
+    }
+    
+    .hover-glow:hover {
+        box-shadow: 0 0 15px rgba(78, 154, 241, 0.7);
+    }
+    
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+    
+    /* Feature Card Animations */
+    .feature-card {
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .feature-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        transition: all 0.5s ease;
+    }
+    
+    .feature-card:hover::before {
+        left: 100%;
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .feature-icon {
+        transition: all 0.3s ease;
+    }
+    
+    .feature-card:hover .feature-icon {
+        transform: rotateY(180deg);
+    }
+    
+    /* Stats Counter Animation */
+    .counter {
+        font-size: 3rem;
+        font-weight: 700;
+        color: #4e9af1;
+    }
+    
+    /* Contact Item Animation */
+    .contact-item {
+        transition: all 0.3s ease;
+        border-radius: 8px;
+        padding: 15px;
+    }
+    
+    .contact-item:hover {
+        background: rgba(78, 154, 241, 0.1);
+        transform: translateX(5px);
+    }
+    
+    .contact-icon {
+        transition: all 0.3s ease;
+    }
+    
+    .contact-item:hover .contact-icon {
+        transform: scale(1.2);
+        color: #4e9af1;
+    }
+</style>
+
+<script>
+    // Counter animation for stats
+    document.addEventListener('DOMContentLoaded', function() {
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200;
         
-        <div class="contact-grid">
-            <div class="contact-info fade-in">
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <div class="contact-text">
-                        <h3>Email</h3>
-                        <p>info@silifault.com</p>
-                    </div>
-                </div>
+        function animateCounters() {
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const increment = target / speed;
                 
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-phone"></i>
-                    </div>
-                    <div class="contact-text">
-                        <h3>Phone</h3>
-                        <p>+1 (555) 123-4567</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-{% endblock %} 
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + increment);
+                    setTimeout(animateCounters, 1);
+                } else {
+                    counter.innerText = target;
+                }
+            });
+        }
+        
+        // Start counter when stats section is in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        const statsSection = document.querySelector('.stats');
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+        
+        // Add animation to elements when they come into view
+        const animateElements = document.querySelectorAll('.animate__animated');
+        
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add(entry.target.dataset.animate);
+                    scrollObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        animateElements.forEach(element => {
+            scrollObserver.observe(element);
+        });
+    });
+</script>
+{% endblock %}

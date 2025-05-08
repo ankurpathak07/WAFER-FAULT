@@ -1,12 +1,28 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for, flash, session
 import os
 import re
+
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import timedelta
+from flask_mail import Mail, Message
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24)  # Required for session management
+app.secret_key = os.getenv('SECRET_KEY', 'your-secret-key-here')
 app.permanent_session_lifetime = timedelta(days=7)  # Session expires after 7 days
+
+# Email configuration
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER')
+
+mail = Mail(app)
 
 # Temporary user storage (replace with database in production)
 users = {
@@ -141,6 +157,75 @@ def upload_file():
             'defects_detected': 3,
             'accuracy': 99.7
         })
+
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    if request.method == 'POST':
+        try:
+            # Get form data
+            name = request.form.get('name')
+            email = request.form.get('email')
+            company = request.form.get('company')
+            subject = request.form.get('subject')
+            message = request.form.get('message')
+
+            # Validate form data
+            if not all([name, email, company, subject, message]):
+                flash('Please fill in all fields', 'error')
+                return redirect(url_for('contact'))
+
+            # Create email message
+            msg = Message(
+                subject=f'New Contact Form Submission: {subject}',
+                recipients=[os.getenv('ADMIN_EMAIL')],
+                body=f'''
+                New contact form submission from SiliFault website:
+                
+                Name: {name}
+                Email: {email}
+                Company: {company}
+                Subject: {subject}
+                
+                Message:
+                {message}
+                '''
+            )
+
+            # Send email
+            mail.send(msg)
+
+            # Send confirmation email to user
+            user_msg = Message(
+                subject='Thank you for contacting SiliFault',
+                recipients=[email],
+                body=f'''
+                Dear {name},
+
+                Thank you for contacting SiliFault. We have received your message and will get back to you shortly.
+
+                Here's a copy of your message:
+                Subject: {subject}
+                Message: {message}
+
+                Best regards,
+                The SiliFault Team
+                '''
+            )
+            mail.send(user_msg)
+
+            flash('Thank you for your message! We will get back to you soon.', 'success')
+            return redirect(url_for('contact'))
+
+        except Exception as e:
+            flash('An error occurred while sending your message. Please try again later.', 'error')
+            print(f"Error sending email: {str(e)}")
+            return redirect(url_for('contact'))
+
+    return render_template('contact.html')
+
+@app.route('/features')
+def features():
+    return render_template('features.html')
 
 if __name__ == '__main__':
     app.run(debug=True) 

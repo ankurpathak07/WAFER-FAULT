@@ -1,0 +1,290 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Features Hero Section -->
+<section class="features-hero dark-features-bg">
+    <div class="container">
+        <div class="features-hero-content animate__animated animate__fadeInUp">
+            <h1 class="features-hero-title">Explore Our Powerful Features</h1>
+            <p class="features-hero-subtitle">Discover how SiliFault leverages AI to revolutionize wafer defect detection and semiconductor manufacturing quality control.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="features section dark-features-bg">
+    <div class="container">
+        <div class="features-grid">
+            <!-- Feature 1 -->
+            <div class="feature-card animate__animated animate__fadeInUp">
+                <div class="feature-icon hover-3d">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3 class="feature-title">AI-Powered Analysis</h3>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> State-of-the-art machine learning algorithms</li>
+                    <li><i class="fas fa-check-circle"></i> Real-time processing</li>
+                    <li><i class="fas fa-check-circle"></i> Pattern recognition</li>
+                    <li><i class="fas fa-check-circle"></i> Automated classification</li>
+                </ul>
+                <a href="/about" class="learn-more hover-underline">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <!-- Feature 2 -->
+            <div class="feature-card animate__animated animate__fadeInUp animate__delay-1s">
+                <div class="feature-icon hover-3d">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3 class="feature-title">Real-Time Processing</h3>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> 50ms processing time</li>
+                    <li><i class="fas fa-check-circle"></i> High throughput</li>
+                    <li><i class="fas fa-check-circle"></i> Parallel processing</li>
+                    <li><i class="fas fa-check-circle"></i> Low latency</li>
+                </ul>
+                <a href="/about" class="learn-more hover-underline">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <!-- Feature 3 -->
+            <div class="feature-card animate__animated animate__fadeInUp animate__delay-2s">
+                <div class="feature-icon hover-3d">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3 class="feature-title">Detailed Reports</h3>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Custom reports</li>
+                    <li><i class="fas fa-check-circle"></i> Data visualization</li>
+                    <li><i class="fas fa-check-circle"></i> Trend analysis</li>
+                    <li><i class="fas fa-check-circle"></i> Export capabilities</li>
+                </ul>
+                <a href="/about" class="learn-more hover-underline">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <!-- Feature 4 -->
+            <div class="feature-card animate__animated animate__fadeInUp">
+                <div class="feature-icon hover-3d">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3 class="feature-title">Quality Assurance</h3>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> 99.9% accuracy</li>
+                    <li><i class="fas fa-check-circle"></i> Quality metrics</li>
+                    <li><i class="fas fa-check-circle"></i> Compliance checks</li>
+                    <li><i class="fas fa-check-circle"></i> Audit trails</li>
+                </ul>
+                <a href="/about" class="learn-more hover-underline">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <!-- Feature 5 -->
+            <div class="feature-card animate__animated animate__fadeInUp animate__delay-1s">
+                <div class="feature-icon hover-3d">
+                    <i class="fas fa-plug"></i>
+                </div>
+                <h3 class="feature-title">Integration Ready</h3>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> API support</li>
+                    <li><i class="fas fa-check-circle"></i> Custom workflows</li>
+                    <li><i class="fas fa-check-circle"></i> Data export</li>
+                    <li><i class="fas fa-check-circle"></i> Third-party tools</li>
+                </ul>
+                <a href="/about" class="learn-more hover-underline">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <!-- Feature 6 -->
+            <div class="feature-card animate__animated animate__fadeInUp animate__delay-2s">
+                <div class="feature-icon hover-3d">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="feature-title">Security & Compliance</h3>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Data encryption</li>
+                    <li><i class="fas fa-check-circle"></i> Access control</li>
+                    <li><i class="fas fa-check-circle"></i> Audit logging</li>
+                    <li><i class="fas fa-check-circle"></i> Compliance reports</li>
+                </ul>
+                <a href="/about" class="learn-more hover-underline">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features CTA Section -->
+<section class="features-cta dark-features-bg">
+    <div class="container">
+        <div class="features-cta-content animate__animated animate__fadeInUp">
+            <h2 class="cta-title">Ready to experience SiliFault?</h2>
+            <p class="cta-subtitle">Upload your wafer image for instant analysis, or contact us to learn more about our technology.</p>
+            <div class="cta-btns">
+                <a href="/upload" class="btn btn-primary">Upload Wafer Image</a>
+                <a href="/contact" class="btn btn-secondary">Contact Us</a>
+                <a href="/about" class="btn btn-secondary">About SiliFault</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .dark-features-bg {
+        background: #181c24;
+        color: #f5f6fa;
+        min-height: 80vh;
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+    .features-hero {
+        padding: 20px 0 12px 0;
+        text-align: center;
+    }
+    .features-hero-title {
+        color: #fff;
+        font-size: 1.8rem;
+        font-weight: 800;
+        margin-bottom: 0.4rem;
+    }
+    .features-hero-subtitle {
+        color: #7ed6df;
+        font-size: 1rem;
+        max-width: 500px;
+        margin: 0 auto 0.8rem auto;
+        opacity: 0.9;
+    }
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 10px;
+        margin-top: 12px;
+        min-height: 30vh;
+        align-items: stretch;
+    }
+    .feature-card {
+        background: #23283a;
+        border-radius: 10px;
+        box-shadow: 0 3px 12px rgba(0,0,0,0.18);
+        padding: 10px 8px;
+        color: #f5f6fa;
+        transition: transform 0.22s, box-shadow 0.22s;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 150px;
+        animation: fadeInCard 0.7s;
+    }
+    .feature-card:hover {
+        transform: translateY(-4px) scale(1.018);
+        box-shadow: 0 8px 24px rgba(52, 152, 219, 0.13);
+    }
+    @keyframes fadeInCard {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .feature-icon {
+        font-size: 1.6rem;
+        color: #7ed6df;
+        margin-bottom: 8px;
+        transition: color 0.3s, transform 0.3s;
+    }
+    .feature-card:hover .feature-icon {
+        color: #00a8ff;
+        transform: scale(1.13) rotate(-3deg);
+    }
+    .feature-title {
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+        color: #fff;
+    }
+    .feature-card ul {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 8px;
+    }
+    .feature-card li {
+        margin-bottom: 4px;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+    }
+    .feature-card li i {
+        color: #00a8ff;
+        margin-right: 7px;
+    }
+    .learn-more {
+        color: #7ed6df;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s;
+    }
+    .learn-more:hover {
+        color: #00a8ff;
+        text-decoration: underline;
+    }
+    .section-title {
+        color: #fff;
+        font-size: 1.7rem;
+        margin-bottom: 1.1rem;
+        text-align: center;
+    }
+    .features-cta {
+        padding: 16px 0 24px 0;
+        text-align: center;
+    }
+    .cta-title {
+        color: #fff;
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 0.4rem;
+    }
+    .cta-subtitle {
+        color: #7ed6df;
+        font-size: 0.9rem;
+        margin-bottom: 0.8rem;
+    }
+    .cta-btns {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+    .btn.btn-primary {
+        background: #7ed6df;
+        color: #181c24;
+        font-weight: 700;
+        border-radius: 8px;
+        padding: 6px 14px;
+        border: none;
+        transition: background 0.3s, color 0.3s;
+    }
+    .btn.btn-primary:hover {
+        background: #00a8ff;
+        color: #fff;
+    }
+    .btn.btn-secondary {
+        background: #23283a;
+        color: #7ed6df;
+        border: 1px solid #7ed6df;
+        font-weight: 700;
+        border-radius: 8px;
+        padding: 6px 14px;
+        transition: background 0.3s, color 0.3s, border 0.3s;
+    }
+    .btn.btn-secondary:hover {
+        background: #00a8ff;
+        color: #fff;
+        border: 1px solid #00a8ff;
+    }
+    @media (max-width: 900px) {
+        .features-hero {
+            padding: 12px 0 6px 0;
+        }
+        .features-grid {
+            gap: 6px;
+        }
+        .feature-card {
+            min-height: 80px;
+            padding: 6px 3px;
+        }
+        .dark-features-bg {
+            padding-top: 4px;
+            padding-bottom: 4px;
+        }
+        .features-cta {
+            padding: 8px 0 12px 0;
+        }
+    }
+</style>
+{% endblock %} 

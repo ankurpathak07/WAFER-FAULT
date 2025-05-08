@@ -17,6 +17,85 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     
+    <style>
+        /* Hover Effects */
+        .nav-links a {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #007bff;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .logo {
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .logo-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover .logo-icon {
+            transform: rotate(360deg);
+        }
+        
+        .footer-links a {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #007bff;
+            padding-left: 5px;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .flash-message {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .footer-content {
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        /* Button Hover Effects */
+        .flash-close {
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        
+        .flash-close:hover {
+            transform: scale(1.1);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Smooth Page Transitions */
+        body {
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+    </style>
+    
     {% block extra_head %}{% endblock %}
 </head>
 <body class="{% block body_class %}{% endblock %}">
@@ -41,11 +120,10 @@
                 <a href="/" class="logo">Sili<span>Fault</span><i class="fas fa-microchip logo-icon"></i></a>
                 
                 <ul class="nav-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="#features">Features</a></li>
+                    <li><a href="/features">Features</a></li>
                     <li><a href="/upload">Upload</a></li>
                     <li><a href="/about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="/contact">Contact</a></li>
                     {% if session.user %}
                         <li><a href="/logout">Logout</a></li>
                     {% else %}
@@ -79,10 +157,10 @@
                 <div class="footer-links-container">
                     <h3 class="footer-title">Quick Links</h3>
                     <ul class="footer-links">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#upload">Upload</a></li>
-                        <li><a href="#about">About</a></li>
+                        <li><a href="/features">Features</a></li>
+                        <li><a href="/upload">Upload</a></li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/contact">Contact</a></li>
                     </ul>
                 </div>
                 
