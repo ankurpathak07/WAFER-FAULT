@@ -1,0 +1,3 @@
+*.pth
+/augmented_dataset_with_resize/
+augmented_dataset_with_resize.zip
