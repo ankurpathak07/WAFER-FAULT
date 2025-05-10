@@ -127,18 +127,68 @@
     </div>
 </section>
 
-<!-- Map Section -->
-<section class="map-section">
+<!-- Additional Contact Information -->
+<section class="additional-info-section">
     <div class="container">
-        <div class="map-container animate__animated animate__fadeIn">
-            <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.0973253658777!2d-122.4194!3d37.7749!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDQ2JzI5LjYiTiAxMjLCsDI1JzA5LjgiVw!5e0!3m2!1sen!2sus!4v1234567890!5m2!1sen!2sus"
-                width="100%" 
-                height="450" 
-                style="border:0;" 
-                allowfullscreen="" 
-                loading="lazy">
-            </iframe>
+        <div class="info-grid">
+            <div class="info-card animate__animated animate__fadeInUp">
+                <div class="info-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3>Business Hours</h3>
+                <ul class="info-list">
+                    <li><strong>Monday - Friday:</strong> 9:00 AM - 6:00 PM PST</li>
+                    <li><strong>Saturday:</strong> 10:00 AM - 4:00 PM PST</li>
+                    <li><strong>Sunday:</strong> Closed</li>
+                </ul>
+            </div>
+
+            <div class="info-card animate__animated animate__fadeInUp animate__delay-1s">
+                <div class="info-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3>Support Channels</h3>
+                <ul class="info-list">
+                    <li><strong>Technical Support:</strong> support@silifault.com</li>
+                    <li><strong>Sales Inquiries:</strong> sales@silifault.com</li>
+                    <li><strong>Emergency Support:</strong> +1 (555) 987-6543</li>
+                </ul>
+            </div>
+
+            <div class="info-card animate__animated animate__fadeInUp animate__delay-2s">
+                <div class="info-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <h3>Global Offices</h3>
+                <ul class="info-list">
+                    <li><strong>Headquarters:</strong> San Francisco, CA</li>
+                    <li><strong>Asia Pacific:</strong> Singapore</li>
+                    <li><strong>Europe:</strong> Munich, Germany</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq-section">
+    <div class="container">
+        <h2 class="section-title animate__animated animate__fadeIn">Frequently Asked Questions</h2>
+        <div class="faq-grid">
+            <div class="faq-item animate__animated animate__fadeInUp">
+                <h3>How quickly can I get started with SiliFault?</h3>
+                <p>Our implementation process typically takes 2-4 weeks, depending on your specific requirements and existing infrastructure. We provide dedicated support throughout the setup process.</p>
+            </div>
+
+            <div class="faq-item animate__animated animate__fadeInUp animate__delay-1s">
+                <h3>What kind of support do you offer?</h3>
+                <p>We offer 24/7 technical support, regular system updates, and dedicated account managers. Our support team is available through email, phone, and our customer portal.</p>
+            </div>
+
+            <div class="faq-item animate__animated animate__fadeInUp animate__delay-2s">
+                <h3>Can I schedule a demo?</h3>
+                <p>Yes! We offer personalized demos to showcase our technology. Contact us through the form above or email sales@silifault.com to schedule a demonstration.</p>
+            </div>
         </div>
     </div>
 </section>
@@ -391,19 +441,97 @@
         transform: translateY(-5px);
     }
 
-    /* Map Section */
-    .map-section {
+    /* Additional Info Section Styles */
+    .additional-info-section {
         padding: 50px 0;
-        background: var(--light-bg);
+        background: #181c24 !important;
+        color: #f5f6fa !important;
     }
 
-    .map-container {
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 2rem;
     }
 
-    /* Responsive Design */
+    .info-card {
+        background: #23283a !important;
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+        transition: transform 0.3s ease;
+    }
+
+    .info-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .info-icon {
+        font-size: 2rem;
+        color: #7ed6df !important;
+        margin-bottom: 1rem;
+    }
+
+    .info-card h3 {
+        color: #fff !important;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .info-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .info-list li {
+        margin-bottom: 0.8rem;
+        color: #f5f6fa !important;
+    }
+
+    .info-list strong {
+        color: #7ed6df !important;
+        margin-right: 0.5rem;
+    }
+
+    /* FAQ Section Styles */
+    .faq-section {
+        padding: 50px 0;
+        background: #181c24 !important;
+        color: #f5f6fa !important;
+    }
+
+    .faq-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 2rem;
+    }
+
+    .faq-item {
+        background: #23283a !important;
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+        transition: transform 0.3s ease;
+    }
+
+    .faq-item:hover {
+        transform: translateY(-5px);
+    }
+
+    .faq-item h3 {
+        color: #fff !important;
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+    }
+
+    .faq-item p {
+        color: #f5f6fa !important;
+        line-height: 1.6;
+    }
+
     @media (max-width: 768px) {
         .contact-grid {
             grid-template-columns: 1fr;
@@ -420,6 +548,10 @@
         .contact-form-container,
         .contact-info-card {
             padding: 20px;
+        }
+
+        .info-grid, .faq-grid {
+            grid-template-columns: 1fr;
         }
     }
 
@@ -491,18 +623,18 @@
         border: 2px solid var(--success-color);
     }
 
-    .contact-hero, .contact-section, .map-section {
+    .contact-hero, .contact-section, .additional-info-section, .faq-section {
         background: #181c24 !important;
         color: #f5f6fa !important;
     }
-    .contact-form-container, .contact-info-card, .map-container {
+    .contact-form-container, .contact-info-card, .info-card {
         background: #23283a !important;
         border-radius: 16px;
         color: #f5f6fa !important;
         box-shadow: 0 8px 32px rgba(0,0,0,0.25);
         padding: 24px;
     }
-    .section-title, .contact-title, .contact-description, .contact-method h3, .contact-info-card h2, .contact-info-card p, .contact-methods, .social-link, .map-section h2 {
+    .section-title, .contact-title, .contact-description, .contact-method h3, .contact-info-card h2, .contact-info-card p, .contact-methods, .social-link, .faq-item h3 {
         color: #fff !important;
     }
     .contact-method .method-icon, .social-link:hover {

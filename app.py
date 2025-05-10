@@ -9,6 +9,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import timedelta
 from flask_mail import Mail, Message
 from dotenv import load_dotenv
+from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import bcrypt
 
 # Load environment variables
 load_dotenv()
@@ -74,6 +76,37 @@ class ImprovedCNN(nn.Module):
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 app.permanent_session_lifetime = timedelta(days=7)
+app.config['UPLOAD_FOLDER'] = 'static/uploads'
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # Limit upload size to 16MB
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///wafer_fault.db"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)  # Initialize SQLAlchemy for database management
+
+
+# Initialize Flask-Bcrypt for password hashing
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password = db.Column(db.String(128), nullable=False)
+    name = db.Column(db.String(50), nullable=False)
+
+    def __repr__(self):
+        return f'<User {self.email}>'
+    
+    def __init__(self, email, password, name):
+        self.email = email
+        self.password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+        self.name = name
+    
+    def check_password(self, password):
+        return bcrypt.checkpw(password.encode('utf-8'), self.password.encode('utf-8'))
+    
+    
+with app.app_context():
+    db.create_all()  # Create database tables if they don't exist
+        
+
 
 # Set up model and device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -163,16 +196,17 @@ def register():
         if password != confirm_password:
             flash('Passwords do not match', 'error')
             return redirect(url_for('register'))
-            
-        if email in users:
+        
+        user = User.query.filter_by(email=email).first()
+        if user:
             flash('Email already registered', 'error')
             return redirect(url_for('register'))
-            
-        # Create new user
-        users[email] = {
-            'password': generate_password_hash(password),
-            'name': name
-        }
+
+        users = User(email=email, password=password, name=name)
+        db.session.add(users)
+        db.session.commit()
+        
+        
         
         flash('Registration successful! Please login.', 'success')
         return redirect(url_for('login'))
@@ -189,16 +223,17 @@ def login():
         if not email or not password:
             flash('Email and password are required', 'error')
             return redirect(url_for('login'))
-            
-        if email in users and check_password_hash(users[email]['password'], password):
-            session['user'] = email
-            session['name'] = users[email]['name']
-            if remember:
-                session.permanent = True
+        
+        user = User.query.filter_by(email=email).first()
+        if user and user.check_password(password):
+            session['user'] = user.email
+            session['name'] = user.name
+            session.permanent = remember
             flash('Login successful!', 'success')
             return redirect(url_for('upload_page'))
         else:
             flash('Invalid email or password', 'error')
+            return redirect(url_for('login'))
     
     return render_template('login.html')
 
