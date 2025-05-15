@@ -106,10 +106,11 @@
                     <li><a href="/upload">Upload</a></li>
                     <li><a href="/about">About</a></li>
                     <li><a href="/contact">Contact</a></li>
-                    {% if session.user %}
-                        <li><a href="/logout">Logout</a></li>
+                    {% if current_user.is_authenticated %}
+                        <li><a href="/history"><i class="fas fa-history"></i> History</a></li>
+                        <li><a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                     {% else %}
-                        <li><a href="/login">Login</a></li>
+                        <li><a href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a></li>
                     {% endif %}
                 </ul>
                 

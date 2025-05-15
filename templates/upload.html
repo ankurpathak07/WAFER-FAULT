@@ -4,7 +4,6 @@
 <!-- Upload Section -->
 <section class="upload-section section">
     <div class="container">
-        
         <h2 class="section-title fade-in">Upload Your Wafer Image</h2>
         
         <div class="upload-container fade-in">
@@ -15,10 +14,10 @@
                 <h3>Drag & Drop your file here</h3>
                 <p>or click to browse files</p>
                 <span class="file-name" style="display: none;"></span>
-                <input type="file" class="file-input" accept="image/*">
+                <input type="file" id="fileInput" class="file-input" accept="image/*">
             </div>
             
-            <button class="btn btn-primary upload-btn">Upload Wafer Image</button>
+            <button class="btn btn-primary upload-btn" id="uploadBtn" disabled>Upload Wafer Image</button>
             
             <div class="results-container" style="display: none;">
                 <!-- Image Preview Section -->
@@ -39,8 +38,250 @@
                         <span class="result-value result-accuracy">-</span>
                     </div>
                 </div>
+                <div class="action-buttons" style="margin-top: 20px; text-align: center;">
+                    <button class="btn btn-primary" onclick="uploadNew()">Upload Another</button>
+                </div>
             </div>
         </div>
     </div>
 </section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('fileInput');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const fileName = document.querySelector('.file-name');
+    const resultsContainer = document.querySelector('.results-container');
+    const imagePreview = document.querySelector('.image-preview');
+    
+    // Handle drag and drop
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('dragover');
+    });
+    
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('dragover');
+    });
+    
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+        const files = e.dataTransfer.files;
+        if (files.length) {
+            handleFile(files[0]);
+        }
+    });
+    
+    // Handle file input change
+    fileInput.addEventListener('change', (e) => {
+        if (e.target.files.length) {
+            handleFile(e.target.files[0]);
+        }
+    });
+    
+    // Handle file selection
+    function handleFile(file) {
+        if (!file.type.startsWith('image/')) {
+            alert('Please upload an image file');
+            return;
+        }
+        
+        fileName.textContent = file.name;
+        fileName.style.display = 'block';
+        uploadBtn.disabled = false;
+        
+        // Preview image
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            imagePreview.innerHTML = `<img src="${e.target.result}" style="max-width: 300px; max-height: 300px;">`;
+            imagePreview.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    }
+    
+    // Handle upload
+    uploadBtn.addEventListener('click', async () => {
+        const file = fileInput.files[0];
+        if (!file) return;
+        
+        const formData = new FormData();
+        formData.append('file', file);
+        
+        try {
+            uploadBtn.disabled = true;
+            uploadBtn.textContent = 'Uploading...';
+            
+            const response = await fetch('/upload', {
+                method: 'POST',
+                body: formData
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                resultsContainer.style.display = 'block';
+                document.querySelector('.result-filename').textContent = data.filename;
+                document.querySelector('.result-defects').textContent = data.prediction;
+                document.querySelector('.result-accuracy').textContent = data.confidence;
+                
+                // Update UI based on prediction
+                const defectsElement = document.querySelector('.result-defects');
+                defectsElement.className = 'result-value result-defects ' + 
+                    (data.prediction === 'No Defect' ? 'no-defect' : 'defect');
+            } else {
+                alert(data.error || 'Upload failed. Please try again.');
+            }
+        } catch (error) {
+            alert('An error occurred. Please try again.');
+            console.error('Upload error:', error);
+        } finally {
+            uploadBtn.disabled = false;
+            uploadBtn.textContent = 'Upload Wafer Image';
+        }
+    });
+});
+
+function uploadNew() {
+    // Reset the form
+    document.getElementById('fileInput').value = '';
+    document.querySelector('.file-name').style.display = 'none';
+    document.querySelector('.image-preview').style.display = 'none';
+    document.querySelector('.results-container').style.display = 'none';
+    document.getElementById('uploadBtn').disabled = true;
+}
+</script>
+
+<style>
+.upload-section {
+    padding: 2rem 0;
+}
+
+.upload-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.upload-area {
+    border: 2px dashed #2196f3;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.upload-area.dragover {
+    background: rgba(33, 150, 243, 0.1);
+    border-color: #1976d2;
+}
+
+.upload-icon {
+    font-size: 3rem;
+    color: #2196f3;
+    margin-bottom: 1rem;
+}
+
+.file-input {
+    display: none;
+}
+
+.upload-btn {
+    margin-top: 1rem;
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+}
+
+.results-container {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+}
+
+.results-card {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.result-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.result-label {
+    font-weight: 600;
+    color: #495057;
+}
+
+.result-value {
+    color: #2196f3;
+}
+
+.result-value.defect {
+    color: #dc3545;
+}
+
+.result-value.no-defect {
+    color: #28a745;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: #2196f3;
+    color: #fff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background: #1976d2;
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: #fff;
+    border: none;
+    text-decoration: none;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+}
+
+.btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+</style>
 {% endblock %}

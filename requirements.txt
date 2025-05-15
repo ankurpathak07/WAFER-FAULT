@@ -8,3 +8,6 @@ tqdm==4.65.0
 SQLAlchemy==2.0.23
 Flask-SQLAlchemy==3.1.1
 python-dotenv==1.0.0
+Flask-Login==0.6.3
+Flask-Mail==0.9.1
+Flask-Bcrypt==1.0.1

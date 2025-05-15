@@ -11,6 +11,11 @@ from flask_mail import Mail, Message
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import bcrypt
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from werkzeug.utils import secure_filename
+from extensions import db, login_manager, mail, init_extensions
+from models.user import User
+from models.prediction import Prediction
 
 # Load environment variables
 load_dotenv()
@@ -81,32 +86,16 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # Limit upload size to 16MB
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///wafer_fault.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db = SQLAlchemy(app)  # Initialize SQLAlchemy for database management
+# Initialize extensions
+init_extensions(app)
 
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
-# Initialize Flask-Bcrypt for password hashing
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(128), nullable=False)
-    name = db.Column(db.String(50), nullable=False)
-
-    def __repr__(self):
-        return f'<User {self.email}>'
-    
-    def __init__(self, email, password, name):
-        self.email = email
-        self.password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
-        self.name = name
-    
-    def check_password(self, password):
-        return bcrypt.checkpw(password.encode('utf-8'), self.password.encode('utf-8'))
-    
-    
+# Import routes after app initialization to avoid circular imports
 with app.app_context():
     db.create_all()  # Create database tables if they don't exist
-        
-
 
 # Set up model and device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -143,14 +132,6 @@ app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER')
 
 mail = Mail(app)
 
-# Temporary user storage (replace with database in production)
-users = {
-    'admin@silifault.com': {
-        'password': generate_password_hash('password'),
-        'name': 'Admin User'
-    }
-}
-
 def is_valid_email(email):
     """Validate email format"""
     pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
@@ -174,6 +155,9 @@ def index():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+        
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
@@ -197,57 +181,60 @@ def register():
             flash('Passwords do not match', 'error')
             return redirect(url_for('register'))
         
-        user = User.query.filter_by(email=email).first()
-        if user:
-            flash('Email already registered', 'error')
-            return redirect(url_for('register'))
+        try:
+            user = User.query.filter_by(email=email).first()
+            if user:
+                flash('Email already registered', 'error')
+                return redirect(url_for('register'))
 
-        users = User(email=email, password=password, name=name)
-        db.session.add(users)
-        db.session.commit()
-        
-        
-        
-        flash('Registration successful! Please login.', 'success')
-        return redirect(url_for('login'))
+            new_user = User(email=email, password=password, name=name)
+            db.session.add(new_user)
+            db.session.commit()
+            
+            flash('Registration successful! Please login.', 'success')
+            return redirect(url_for('login'))
+        except Exception as e:
+            db.session.rollback()
+            flash('An error occurred during registration. Please try again.', 'error')
+            print(f"Registration error: {str(e)}")
+            return redirect(url_for('register'))
         
     return render_template('register.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('upload_page'))
+        
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
-        remember = request.form.get('remember')
+        remember = request.form.get('remember', False)
         
-        if not email or not password:
-            flash('Email and password are required', 'error')
-            return redirect(url_for('login'))
-        
-        user = User.query.filter_by(email=email).first()
-        if user and user.check_password(password):
-            session['user'] = user.email
-            session['name'] = user.name
-            session.permanent = remember
-            flash('Login successful!', 'success')
-            return redirect(url_for('upload_page'))
-        else:
-            flash('Invalid email or password', 'error')
-            return redirect(url_for('login'))
+        try:
+            user = User.query.filter_by(email=email).first()
+            if user and user.check_password(password):
+                login_user(user, remember=remember)
+                next_page = request.args.get('next')
+                flash('Login successful!', 'success')
+                return redirect(next_page or url_for('upload_page'))
+            else:
+                flash('Invalid email or password', 'error')
+        except Exception as e:
+            flash('An error occurred during login. Please try again.', 'error')
+            print(f"Login error: {str(e)}")
     
     return render_template('login.html')
 
 @app.route('/logout')
+@login_required
 def logout():
-    session.clear()
-    flash('You have been logged out', 'info')
+    logout_user()
     return redirect(url_for('index'))
 
 @app.route('/upload')
+@login_required
 def upload_page():
-    if 'user' not in session:
-        flash('Please login to access this page', 'error')
-        return redirect(url_for('login'))
     return render_template('upload.html')
 
 @app.route('/about')
@@ -281,49 +268,59 @@ def predict_image(image_path):
             'error': str(e)
         }
 
+@app.route('/history')
+@login_required
+def history():
+    predictions = Prediction.query.filter_by(user_id=current_user.id).order_by(Prediction.timestamp.desc()).all()
+    return render_template('history.html', predictions=predictions)
+
 @app.route('/upload', methods=['POST'])
+@login_required
 def upload_file():
-    if 'user' not in session:
-        return jsonify({'error': 'Unauthorized'}), 401
-        
     if 'file' not in request.files:
-        return jsonify({'error': 'No file part'}), 400
-    
+        return jsonify({'success': False, 'error': 'No file selected'})
+        
     file = request.files['file']
-    
     if file.filename == '':
-        return jsonify({'error': 'No selected file'}), 400
-    
-    if file and file.filename.lower().endswith(('.png', '.jpg', '.jpeg', '.tiff', '.bmp')):
-        # Create uploads directory if it doesn't exist
-        upload_dir = os.path.join(app.root_path, 'static', 'uploads')
-        os.makedirs(upload_dir, exist_ok=True)
+        return jsonify({'success': False, 'error': 'No file selected'})
         
-        # Save the uploaded file
-        file_path = os.path.join(upload_dir, file.filename)
-        file.save(file_path)
+    if file:
+        filename = secure_filename(file.filename)
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(filepath)
         
-        # Make prediction
-        result = predict_image(file_path)
-        print(result)
-        
-        if result['success']:
-            return jsonify({
-                'success': True,
-                'filename': file.filename,
-                'prediction': result['prediction'],
-                'confidence': f"{result['confidence']:.2f}%"
-            })
-        else:
-            return jsonify({
-                'success': False,
-                'error': result['error']
-            })
-    
-    return jsonify({'error': 'Invalid file type'}), 400
+        try:
+            result = predict_image(filepath)
+            if result['success']:
+                # Store prediction in history
+                new_prediction = Prediction(
+                    user_id=current_user.id,
+                    image_path=filename,  # Store just the filename
+                    defect_type=result['prediction'],
+                    confidence=result['confidence']
+                )
+                db.session.add(new_prediction)
+                db.session.commit()
+                
+                return jsonify({
+                    'success': True,
+                    'filename': filename,
+                    'prediction': result['prediction'],
+                    'confidence': f"{result['confidence']:.2f}%",
+                    'image_path': '/static/uploads/' + filename  # Return the web-accessible path
+                })
+            else:
+                return jsonify({'success': False, 'error': result['error']})
+            
+        except Exception as e:
+            return jsonify({'success': False, 'error': str(e)})
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
+    if not mail:
+        flash('Contact form is currently unavailable. Please try again later.', 'error')
+        return redirect(url_for('contact'))
+        
     if request.method == 'POST':
         try:
             # Get form data
@@ -336,6 +333,10 @@ def contact():
             # Validate form data
             if not all([name, email, company, subject, message]):
                 flash('Please fill in all fields', 'error')
+                return redirect(url_for('contact'))
+
+            if not is_valid_email(email):
+                flash('Please enter a valid email address', 'error')
                 return redirect(url_for('contact'))
 
             # Create email message
@@ -381,8 +382,8 @@ def contact():
             return redirect(url_for('contact'))
 
         except Exception as e:
+            app.logger.error(f"Error sending email: {str(e)}")
             flash('An error occurred while sending your message. Please try again later.', 'error')
-            print(f"Error sending email: {str(e)}")
             return redirect(url_for('contact'))
 
     return render_template('contact.html')
@@ -391,5 +392,17 @@ def contact():
 def features():
     return render_template('features.html')
 
+def create_required_directories():
+    directories = [
+        os.path.join(app.root_path, 'static', 'uploads'),
+        os.path.join(app.root_path, 'reports'),
+    ]
+    for directory in directories:
+        os.makedirs(directory, exist_ok=True)
+
+create_required_directories()
+
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
     app.run(debug=True)

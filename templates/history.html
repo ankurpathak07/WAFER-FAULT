@@ -1,0 +1,212 @@
+{% extends "base.html" %}
+
+{% block title %}Prediction History - SiliFault{% endblock %}
+
+{% block content %}
+<section class="history-section">
+    <div class="container">
+        <h2 class="section-title animate__animated animate__fadeInDown">Analysis History</h2>
+        
+        <div class="history-grid">
+            {% if predictions %}
+                {% for prediction in predictions %}
+                    <div class="prediction-card animate__animated animate__fadeInUp">                        <div class="prediction-image">
+                            <img src="{{ url_for('static', filename='uploads/' + prediction.image_path) }}" alt="Wafer image">
+                        </div>
+                        <div class="prediction-details">
+                            <div class="prediction-item">
+                                <span class="label">Analyzed on:</span>
+                                <span class="value">{{ prediction.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</span>
+                            </div>
+                            <div class="prediction-item">
+                                <span class="label">Defect Type:</span>
+                                <span class="value {% if prediction.defect_type == 'none' %}status-pass{% else %}status-fail{% endif %}">
+                                    {{ prediction.defect_type }}
+                                </span>
+                            </div>
+                            <div class="prediction-item">
+                                <span class="label">Confidence:</span>
+                                <span class="value confidence-badge {% if prediction.confidence > 80 %}high-confidence{% elif prediction.confidence > 50 %}medium-confidence{% else %}low-confidence{% endif %}">
+                                    {{ "%.1f"|format(prediction.confidence) }}%
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="no-predictions animate__animated animate__fadeIn">
+                    <i class="fas fa-history"></i>
+                    <h3>No Analysis History</h3>
+                    <p>You haven't analyzed any wafer images yet.</p>
+                    <a href="{{ url_for('upload_page') }}" class="btn btn-primary">Analyze Wafer Image</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<style>
+    .history-section {
+        background: #181c24;
+        padding: 60px 0;
+        min-height: calc(100vh - 100px);
+    }
+
+    .section-title {
+        color: #fff;
+        text-align: center;
+        margin-bottom: 40px;
+        font-size: 2.5rem;
+        font-weight: 700;
+    }
+
+    .history-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 30px;
+        padding: 20px;
+    }
+
+    .prediction-card {
+        background: #23283a;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
+    }
+
+    .prediction-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+
+    .prediction-image {
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+        border-bottom: 2px solid rgba(126, 214, 223, 0.1);
+    }
+
+    .prediction-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .prediction-card:hover .prediction-image img {
+        transform: scale(1.05);
+    }
+
+    .prediction-details {
+        padding: 20px;
+    }
+
+    .prediction-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .prediction-item:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    .label {
+        color: #7ed6df;
+        font-weight: 500;
+    }
+
+    .value {
+        color: #fff;
+        font-weight: 600;
+    }
+
+    .status-pass {
+        color: #4cd137 !important;
+    }
+
+    .status-fail {
+        color: #e84118 !important;
+    }
+
+    .confidence-badge {
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.9em;
+    }
+
+    .high-confidence {
+        background: rgba(76, 209, 55, 0.1);
+        color: #4cd137 !important;
+    }
+
+    .medium-confidence {
+        background: rgba(255, 185, 0, 0.1);
+        color: #ffb900 !important;
+    }
+
+    .low-confidence {
+        background: rgba(232, 65, 24, 0.1);
+        color: #e84118 !important;
+    }
+
+    .no-predictions {
+        text-align: center;
+        grid-column: 1 / -1;
+        padding: 60px 20px;
+        color: #fff;
+    }
+
+    .no-predictions i {
+        font-size: 3rem;
+        color: #7ed6df;
+        margin-bottom: 20px;
+    }
+
+    .no-predictions h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        color: #fff;
+    }
+
+    .no-predictions p {
+        color: rgba(255,255,255,0.7);
+        margin-bottom: 20px;
+    }
+
+    .btn-primary {
+        background: #7ed6df;
+        color: #181c24;
+        padding: 12px 28px;
+        border-radius: 8px;
+        border: none;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: inline-block;
+    }
+
+    .btn-primary:hover {
+        background: #00a8ff;
+        transform: translateY(-2px);
+        color: #fff;
+    }
+
+    @media (max-width: 768px) {
+        .history-grid {
+            grid-template-columns: 1fr;
+            padding: 10px;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+    }
+</style>
+{% endblock %}
