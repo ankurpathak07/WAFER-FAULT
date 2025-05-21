@@ -1,0 +1,270 @@
+{% extends "base.html" %}
+
+{% block title %}Wafer Defect Gallery - SiliFault{% endblock %}
+
+{% block content %}
+<div class="container dark-container">
+    <section class="gallery-header">
+        <h1 class="hero-title">Wafer Defect Gallery</h1>
+        <p class="hero-subtitle">Explore different types of wafer defects and their characteristics</p>
+    </section>
+
+    <div class="defect-gallery">
+        <!-- Edge Defects -->
+        <div class="tech-card animate__animated animate__fadeInUp">
+            <div class="tech-icon hover-3d">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h3 class="tech-title">Edge Defects</h3>
+            <p class="tech-description">Defects occurring at the edges of the wafer, often caused by handling or processing issues. These can affect the structural integrity and electrical properties of the wafer.</p>
+            <ul class="tech-list">
+                <li class="hover-grow"><i class="fas fa-check-circle"></i> Common in wafer handling</li>
+                <li class="hover-grow"><i class="fas fa-check-circle"></i> Can affect wafer strength</li>
+                <li class="hover-grow"><i class="fas fa-check-circle"></i> May impact device yield</li>
+            </ul>
+        </div>
+
+        <!-- Donut Defects -->
+        <div class="tech-card animate__animated animate__fadeInUp animate__delay-1s">
+            <div class="tech-icon hover-3d">
+                <i class="fas fa-circle-notch"></i>
+            </div>
+            <h3 class="tech-title">Donut Defects</h3>
+            <p class="tech-description">Circular defects with a hollow center, typically caused by particle contamination or processing issues. These can affect device performance and reliability.</p>
+            <ul class="tech-list">
+                <li class="hover-grow"><i class="fas fa-check-circle"></i> Ring-shaped appearance</li>
+                <li class="hover-grow"><i class="fas fa-check-circle"></i> Often caused by particles</li>
+                <li class="hover-grow"><i class="fas fa-check-circle"></i> Can affect multiple layers</li>
+            </ul>
+        </div>
+
+        <!-- Circle Defects -->
+        <div class="tech-card animate__animated animate__fadeInUp animate__delay-2s">
+            <div class="tech-icon hover-3d">
+                <i class="fas fa-circle"></i>
+            </div>
+            <h3 class="tech-title">Circle Defects</h3>
+            <p class="tech-description">Perfectly circular defects that can indicate various issues in the manufacturing process, from contamination to etching problems.</p>
+            <ul class="tech-list">
+                <li class="hover-grow"><i class="fas fa-check-circle"></i> Perfect circular shape</li>
+                <li class="hover-grow"><i class="fas fa-check-circle"></i> Multiple possible causes</li>
+                <li class="hover-grow"><i class="fas fa-check-circle"></i> Can be microscopic</li>
+            </ul>
+        </div>
+
+        <!-- Scratch Defects -->
+        <div class="tech-card animate__animated animate__fadeInUp">
+            <div class="tech-icon hover-3d">
+                <i class="fas fa-slash"></i>
+            </div>
+            <h3 class="tech-title">Scratch Defects</h3>
+            <p class="tech-description">Linear damage to the wafer surface caused by mechanical contact or improper handling. These can disrupt circuit patterns and affect device performance.</p>
+            <ul class="tech-list">
+                <li class="hover-grow"><i class="fas fa-check-circle"></i> Linear patterns</li>
+                <li class="hover-grow"><i class="fas fa-check-circle"></i> Mechanical damage</li>
+                <li class="hover-grow"><i class="fas fa-check-circle"></i> Can be deep or superficial</li>
+            </ul>
+        </div>
+
+        <!-- Random Defects -->
+        <div class="tech-card animate__animated animate__fadeInUp animate__delay-1s">
+            <div class="tech-icon hover-3d">
+                <i class="fas fa-random"></i>
+            </div>
+            <h3 class="tech-title">Random Defects</h3>
+            <p class="tech-description">Irregularly shaped defects that appear randomly across the wafer surface. These can be caused by various factors including contamination and process variations.</p>
+            <ul class="tech-list">
+                <li class="hover-grow"><i class="fas fa-check-circle"></i> Irregular shapes</li>
+                <li class="hover-grow"><i class="fas fa-check-circle"></i> Random distribution</li>
+                <li class="hover-grow"><i class="fas fa-check-circle"></i> Multiple possible causes</li>
+            </ul>
+        </div>
+
+        <!-- None (No Defects) -->
+        <div class="tech-card animate__animated animate__fadeInUp animate__delay-2s">
+            <div class="tech-icon hover-3d">
+                <i class="fas fa-check-double"></i>
+            </div>
+            <h3 class="tech-title">No Defects</h3>
+            <p class="tech-description">A perfect wafer with no visible defects. This is the ideal condition for semiconductor manufacturing.</p>
+            <ul class="tech-list">
+                <li class="hover-grow"><i class="fas fa-check-circle"></i> Clean surface</li>
+                <li class="hover-grow"><i class="fas fa-check-circle"></i> No visible damage</li>
+                <li class="hover-grow"><i class="fas fa-check-circle"></i> Optimal condition</li>
+            </ul>
+        </div>
+
+        <!-- LOC (Line of Cuts) -->
+        <div class="tech-card animate__animated animate__fadeInUp">
+            <div class="tech-icon hover-3d">
+                <i class="fas fa-grip-lines"></i>
+            </div>
+            <h3 class="tech-title">LOC (Line of Cuts)</h3>
+            <p class="tech-description">Defects appearing as a line of cuts or scratches, often caused by mechanical stress or improper handling during the manufacturing process.</p>
+            <ul class="tech-list">
+                <li class="hover-grow"><i class="fas fa-check-circle"></i> Linear pattern of cuts</li>
+                <li class="hover-grow"><i class="fas fa-check-circle"></i> Mechanical stress related</li>
+                <li class="hover-grow"><i class="fas fa-check-circle"></i> Can affect multiple dies</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Dark Mode Background */
+    body {
+        background-color: #0f1117 !important;
+    }
+
+    .dark-container {
+        background-color: #0f1117 !important;
+        min-height: 100vh;
+        padding: 2rem 0;
+    }
+
+    /* Animation Classes */
+    .hover-grow {
+        transition: all 0.3s ease;
+    }
+    
+    .hover-grow:hover {
+        transform: scale(1.03);
+        z-index: 10;
+    }
+    
+    .hover-3d {
+        transition: all 0.3s ease;
+    }
+    
+    .hover-3d:hover {
+        transform: perspective(1000px) rotateX(10deg) rotateY(10deg);
+    }
+
+    /* Gallery Header Styles */
+    .gallery-header {
+        text-align: center;
+        margin: 2rem 0;
+        padding: 2rem 0;
+        background: #181c24;
+        color: #f5f6fa;
+        border-radius: 18px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+        color: #fff;
+        margin-bottom: 1rem;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+        color: #f5f6fa;
+        opacity: 0.9;
+    }
+
+    /* Gallery Grid */
+    .defect-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 2rem 0;
+    }
+
+    /* Tech Card Styles */
+    .tech-card {
+        background: #23283a !important;
+        border-radius: 18px;
+        padding: 20px;
+        color: #f5f6fa !important;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        transition: transform 0.25s, box-shadow 0.25s;
+        border: 1px solid rgba(126, 214, 223, 0.1);
+    }
+
+    .tech-card:hover {
+        transform: translateY(-4px) scale(1.018);
+        box-shadow: 0 8px 24px rgba(52, 152, 219, 0.13);
+        border-color: rgba(126, 214, 223, 0.2);
+    }
+
+    .tech-icon {
+        font-size: 2rem;
+        color: #7ed6df !important;
+        margin-bottom: 1rem;
+    }
+
+    .tech-title {
+        color: #fff !important;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .tech-description {
+        color: #f5f6fa !important;
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+
+    .tech-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .tech-list li {
+        color: #f5f6fa !important;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .tech-list li i {
+        color: #7ed6df !important;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .defect-gallery {
+            grid-template-columns: 1fr;
+        }
+
+        .hero-title {
+            font-size: 2rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+        }
+    }
+</style>
+
+<!-- Add Animate.css for scroll animations -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+<script>
+    // Add scroll animation triggers
+    document.addEventListener('DOMContentLoaded', function() {
+        const animateElements = document.querySelectorAll('.animate__animated');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add(entry.target.dataset.animate);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        animateElements.forEach(element => {
+            observer.observe(element);
+        });
+    });
+</script>
+{% endblock %} 

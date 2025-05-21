@@ -392,6 +392,10 @@ def contact():
 def features():
     return render_template('features.html')
 
+@app.route('/gallery')
+def gallery():
+    return render_template('gallery.html')
+
 def create_required_directories():
     directories = [
         os.path.join(app.root_path, 'static', 'uploads'),
